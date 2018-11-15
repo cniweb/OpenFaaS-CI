@@ -26,6 +26,6 @@ notifications:
     on_failure: always
 
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin; fi
   - docker tag templum/functions-base64:latest "templum/functions-base64:${TRAVIS_COMMIT}"
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then docker push "templum/functions-base64:${TRAVIS_COMMIT}"; fi
