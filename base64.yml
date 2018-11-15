@@ -1,0 +1,8 @@
+provider:
+  name: faas
+  gateway: http://192.168.99.100:31112
+functions:
+  base64:
+    lang: node
+    handler: ./base64
+    image: templum/functions-base64:latest

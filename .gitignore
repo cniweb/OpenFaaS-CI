@@ -1,0 +1,7 @@
+# Get's pulled by OpenFaaS Cli on-demand
+template
+# Is build automatically
+build
+# Node Specific
+node_modules
+yarn-error.log
