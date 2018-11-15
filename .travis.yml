@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "10"
-  - "8"
+
 # make use of vm's 
 sudo: 'required'
 
@@ -26,7 +26,6 @@ notifications:
     on_failure: always
 
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-      faas-cli push -f base64.yml
-    fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
+  - docker tag templum/functions-base64:latest "templum/functions-base64:${TRAVIS_COMMIT}"
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then docker push "templum/functions-base64:${TRAVIS_COMMIT}"; fi
