@@ -16,7 +16,7 @@ before_install:
 
 script:
   - cd base64 && npm run test && cd ..
-  - faas-cli build
+  - faas-cli build -f base64.yml
 
 notifications:
   email:
@@ -28,5 +28,5 @@ notifications:
 after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-      faas-cli push
+      faas-cli push -f base64.yml
     fi
