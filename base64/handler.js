@@ -1,7 +1,20 @@
 "use strict";
 
 module.exports = (context, callback) => {
-  if (context && context.encode) {
+  try {
+    if (context) {
+      context = JSON.parse(context);
+    } else {
+      throw new Error("Nothing provided");
+    }
+  } catch (error) {
+    return callback(
+      new Error("Wrong Input was presented, expect JSON"),
+      undefined
+    );
+  }
+
+  if (context.encode) {
     const { text } = context;
     return callback(undefined, Buffer.from(text).toString("base64"));
   } else if (context && context.decode) {

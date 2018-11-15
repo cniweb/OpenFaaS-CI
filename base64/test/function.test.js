@@ -12,7 +12,7 @@ describe("Base64 Function", function() {
       done();
     };
 
-    testTarget({ encode: true, text: RAW_VALUE }, testHandler);
+    testTarget(JSON.stringify({ encode: true, text: RAW_VALUE }), testHandler);
   });
 
   it("should decode the provided text", done => {
@@ -22,7 +22,10 @@ describe("Base64 Function", function() {
       done();
     };
 
-    testTarget({ decode: true, text: ENCODED_VALUE }, testHandler);
+    testTarget(
+      JSON.stringify({ decode: true, text: ENCODED_VALUE }),
+      testHandler
+    );
   });
 
   it("should return an error when no operation is specified", done => {
@@ -32,13 +35,13 @@ describe("Base64 Function", function() {
       done();
     };
 
-    testTarget({ text: ENCODED_VALUE }, testHandler);
+    testTarget(JSON.stringify({ text: ENCODED_VALUE }), testHandler);
   });
 
   it("should return an error when no json was provided", done => {
     const testHandler = (err, result) => {
       expect(result).to.be.undefined;
-      expect(err.message).to.equal("Decode or Encode needs to be true");
+      expect(err.message).to.equal("Wrong Input was presented, expect JSON");
       done();
     };
 
