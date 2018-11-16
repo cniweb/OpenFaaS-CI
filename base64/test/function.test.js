@@ -15,6 +15,21 @@ describe("Base64 Function", function() {
     testTarget(JSON.stringify({ encode: true, text: RAW_VALUE }), testHandler);
   });
 
+  it("should fallback to empty string when no text is present", done => {
+    const encodeHandler = (err, result) => {
+      expect(err).to.be.undefined;
+      expect(result).to.equal("");
+    };
+    const decodeHandler = (err, result) => {
+      expect(err).to.be.undefined;
+      expect(result).to.equal("");
+      done();
+    };
+
+    testTarget(JSON.stringify({ encode: true }), encodeHandler);
+    testTarget(JSON.stringify({ decode: true }), decodeHandler);
+  });
+
   it("should decode the provided text", done => {
     const testHandler = (err, result) => {
       expect(err).to.be.undefined;
