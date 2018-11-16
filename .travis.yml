@@ -28,4 +28,5 @@ notifications:
 after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin; fi
   - docker tag cniweb/functions-base64:latest "cniweb/functions-base64:${TRAVIS_COMMIT}"
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then docker push "cniweb/functions-base64:latest"; fi
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then docker push "cniweb/functions-base64:${TRAVIS_COMMIT}"; fi
