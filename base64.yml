@@ -5,4 +5,4 @@ functions:
   base64:
     lang: node
     handler: ./base64
-    image: templum/functions-base64:latest
+    image: cniweb/functions-base64:latest
